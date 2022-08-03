@@ -6,14 +6,19 @@
   "main": "src/index.js",
   "dependencies": {
     "@blueprintjs/core": "3.31.0",
+    "@chakra-ui/react": "2.2.4",
+    "@emotion/react": "11.10.0",
+    "@emotion/styled": "11.10.0",
     "flume": "0.5.1",
+    "framer-motion": "6.5.1",
     "mobx": "5.15.6",
     "mobx-react-lite": "2.0.7",
     "mobx-state-tree": "3.17.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-mosaic-component": "4.1.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "recoil": "0.7.4"
   },
   "devDependencies": {
     "typescript": "3.3.3"

@@ -1,53 +1,51 @@
-import React from 'react'
-import { JsonInput, JsonOutput, FormRender } from './components'
-import Flume from './flume'
-import Output from './output'
-import Input from './input'
+import React, { useEffect } from 'react'
 
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import 'react-mosaic-component/react-mosaic-component.css'
 import './styles.css'
-
+import { gridlayout } from './atoms'
 import { Mosaic, MosaicWindow } from 'react-mosaic-component'
+import { useRecoilValue } from 'recoil'
 
-const Window = (id, path) => (
-  <MosaicWindow toolbarControls={[]} path={path} title={id}>
-    {id === 'Input JSON' && <JsonInput />}
-    {id === 'Form' && <FormRender />}
-    {id === 'Graph' && <Flume />}
-    {id === 'Output JSON' && <JsonOutput />}
-    {id === 'output' && <Output />}
-    {id === 'Incoming facts' && <Input />}
-  </MosaicWindow>
-)
+export default () => {
+  const appMap = useRecoilValue(gridlayout)
 
-export default () => (
-  <Mosaic
-    renderTile={Window}
-    initialValue={{
-      direction: 'column',
+  const Window = (id, path) => (
+    <MosaicWindow path={path} title={id}>
+      <div style={{ width: '100', height: '100%' }}>{appMap[id]}</div>
+    </MosaicWindow>
+  )
+
+  const initial = {
+    direction: 'column',
+    first: {
+      direction: 'row',
       first: {
         direction: 'row',
-        first: {
-          direction: 'row',
-          first: 'Input JSON',
-          second: 'Form',
-          splitPercentage: 33
-        },
-        second: 'Output JSON',
-        splitPercentage: 75
+        first: 'jsonInput',
+        second: 'formRender',
+        splitPercentage: 33
       },
-      second: {
-        direction: 'row',
-        first: 'Incoming facts',
-        second: 'Graph',
-        splitPercentage: 20
-      },
-      splitPercentage: 30
-    }}
-    resize={{
-      minimumPaneSizePercentage: 0
-    }}
-  />
-)
+      second: 'jsonOutput',
+      splitPercentage: 75
+    },
+    second: {
+      direction: 'row',
+      first: 'input',
+      second: 'flume',
+      splitPercentage: 20
+    },
+    splitPercentage: 30
+  }
+
+  return (
+    <Mosaic
+      renderTile={Window}
+      initialValue={initial}
+      resize={{
+        minimumPaneSizePercentage: 0
+      }}
+    />
+  )
+}
