@@ -17,13 +17,6 @@ const addToTopRight = (setgrid, gridstate, window) => {
   const destination = getNodeAtPath(gridstate, path)
   const direction = parent ? getOtherDirection(parent.direction) : 'row'
 
-  console.clear()
-  console.log(JSON.stringify(gridstate, null, '\t'))
-  console.log(path)
-  console.log(parent)
-  console.log(destination)
-  console.log(direction)
-
   let first
   let second
   if (direction === 'row') {
@@ -46,7 +39,7 @@ const addToTopRight = (setgrid, gridstate, window) => {
       }
     }
   ])
-  console.log(JSON.stringify(gridstate, null, '\t'))
+  //  console.log(JSON.stringify(gridstate, null, '\t'))
   setgrid(gridstate)
 }
 
@@ -54,6 +47,7 @@ const Navbar = () => {
   const [appMap, setAppMap] = useRecoilState(gridlayout)
 
   const [viewon, setview] = React.useState(false)
+  const [openwin, setopenwin] = React.useState([])
 
   return (
     <>
@@ -67,15 +61,39 @@ const Navbar = () => {
                 <div>
                   <HStack>
                     <Button
-                      onClick={() => addToTopRight(setAppMap, appMap, 'e1')}>
+                      onClick={() =>
+                        addToTopRight(
+                          setAppMap,
+                          appMap,
+                          'e1',
+                          openwin,
+                          setopenwin
+                        )
+                      }>
                       1
                     </Button>
                     <Button
-                      onClick={() => addToTopRight(setAppMap, appMap, 'e2')}>
+                      onClick={() =>
+                        addToTopRight(
+                          setAppMap,
+                          appMap,
+                          'e2',
+                          openwin,
+                          setopenwin
+                        )
+                      }>
                       2
                     </Button>
                     <Button
-                      onClick={() => addToTopRight(setAppMap, appMap, 'e3')}>
+                      onClick={() =>
+                        addToTopRight(
+                          setAppMap,
+                          appMap,
+                          'e3',
+                          openwin,
+                          setopenwin
+                        )
+                      }>
                       3
                     </Button>
                   </HStack>
